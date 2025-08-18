@@ -27,9 +27,9 @@ const OverViewCardItem: React.FC<OverViewCardItemProps> = ({
     <div
       className={`relative flex flex-col justify-between  p-2 md:p-3 border bg-neutral-50 dark:border-neutral-600 dark:bg-neutral-800  w-full rounded-2xl gap-3 md:gap-6 cursor-pointer hover:scale-[1.025] transition-all boxShadow`}>
       <div className="flex w-full justify-between">
-        <h1 className="text-neutral-500 font-medium text-xs md:text-lg  hyphens-auto break-words">
+        <div className="text-neutral-500 font-medium text-xs md:text-lg  hyphens-auto break-words">
           {title}
-        </h1>
+        </div>
 
         <div>
           <select

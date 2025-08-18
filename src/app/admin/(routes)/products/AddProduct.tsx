@@ -29,20 +29,17 @@ const categories = [
   {
     id: "2",
     category: "Table basse",
-    image:
-      "https://dnn2wvbhzy3u8.cloudfront.net/codebackup/550x0/product_gallery_images/1242344/3_1751534916Osaka-Oak-Round-Coffee-Table-Slatted-Base-01.jpg",
+    image: "/coffeeTable.png",
   },
   {
     id: "3",
     category: "Table de nuit",
-    image:
-      "https://dnn2wvbhzy3u8.cloudfront.net/codebackup/550x0/product_gallery_images/1242344/3_1751534916Osaka-Oak-Round-Coffee-Table-Slatted-Base-05.jpg",
+    image: "/nightstand.png",
   },
   {
     id: "4",
     category: "Commode",
-    image:
-      "https://dnn2wvbhzy3u8.cloudfront.net/codebackup/550x0/product_gallery_images/1242344/3_1751534916Osaka-Oak-Round-Coffee-Table-Slatted-Base-03.jpg",
+    image: "/commode.png",
   },
 ];
 export type Category = (typeof categories)[number];
@@ -117,9 +114,9 @@ const AddProduct = () => {
     BlobDimensionImageTypes[]
   >([]);
 
-  const [imagePreviewUrl, setImagePreviewUrl] = useState<ImagePreviewTypes[]>(
-    []
-  );
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<
+    ImagePreviewTypes[] | []
+  >([]);
   const [materialQuill, setMaterialQuill] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -346,15 +343,13 @@ const AddProduct = () => {
       // Upload textures from selectedColors instead of imagePreviewUrl
       const uploadedTextures = await Promise.all(
         imagePreviewUrl.map(async (color) => {
-          if (!color.fileTexture)
-            return { colorId: color.colorId, texture: "", fileTexture: "" };
+          // If no fileTexture, just skip
+          if (!color.fileTexture) {
+            return { colorId: color.colorId, texture: "" };
+          }
 
           try {
             const formData = new FormData();
-            // const blob = await fetch(color.fileTexture).then((res) =>
-            //   res.blob()
-            // );
-
             formData.append("file", color.fileTexture);
             formData.append("upload_preset", "Itqan-store");
             formData.append("folder", "Itqan/textures");
@@ -589,7 +584,7 @@ const AddProduct = () => {
 
         {/* Variants Section */}
         <div>
-          <h2 className="font-bold">Couleurs</h2>
+          <h4 className="font-bold">Couleurs</h4>
           <div className="bg-cyan-50">
             {selectedColors.map((variant, index) => (
               <div key={variant.id} className="relative space-y-3">
@@ -599,30 +594,34 @@ const AddProduct = () => {
                   onClick={() => removeVariant(variant.id)}>
                   <Trash className="w-6 inline p-1" />
                 </button>
-                <div className="space-y-2">
-                  {" "}
-                  <Input
-                    id={`colors.${index}.name`}
-                    label="Nom du couleur"
-                    register={register}
-                    defaultValue={variant.name}
-                    {...register(`colors.${index}.name`, {
-                      required: "Le nom du produit est obligatoire",
-                      minLength: {
-                        value: 3,
-                        message:
-                          "Le nom du produit doit contenir au moins 3 caractères",
-                      },
-                      onChange: (value) =>
-                        updateColor(variant.id, {
-                          ...variant,
-                          name: value.target.value,
-                        }),
-                    })}
-                    errors={errors}
-                  />
+                <div className="space-y-2 ">
+                  <div className="w-[90%]">
+                    {" "}
+                    <Input
+                      id={`colors.${index}.name`}
+                      label="Nom du couleur"
+                      register={register}
+                      defaultValue={variant.name}
+                      {...register(`colors.${index}.name`, {
+                        required: "Le nom du produit est obligatoire",
+                        minLength: {
+                          value: 3,
+                          message:
+                            "Le nom du produit doit contenir au moins 3 caractères",
+                        },
+                        onChange: (value) =>
+                          updateColor(variant.id, {
+                            ...variant,
+                            name: value.target.value,
+                          }),
+                      })}
+                      className=""
+                      widthfull
+                      errors={errors}
+                    />
+                  </div>
                   <div className="">
-                    <h2 className="font-bold">Matériels</h2>
+                    <h4 className="font-bold">Matériels</h4>
                     <QuillEditor
                       value={variant.materials ?? ""}
                       onChange={(html) => {
@@ -633,7 +632,7 @@ const AddProduct = () => {
                         setValue(`colors.${index}.materials`, html); // optional RHF mirror
                       }}
                     />
-                    <h2 className="text-lg font-bold mb-2">Preview:</h2>
+                    <h4 className="text-lg font-bold mb-2">Preview:</h4>
                     <div className=" p-2 border rounded min-h-[200px]">
                       <div
                         className="q1-editor"
@@ -684,9 +683,9 @@ const AddProduct = () => {
                   <Input
                     id={`colors.${index}.texture`}
                     label="Votre image"
+                    defaultValue={variant.texture}
                     register={register}
                     {...register(`colors.${index}.texture`, {
-                      required: "L'image de la prestation est obligatoire",
                       onChange: (e) => handleTexture(e, variant.id),
                     })}
                     errors={errors}
@@ -695,7 +694,7 @@ const AddProduct = () => {
                     isHidden
                   />
                   <label htmlFor={`colors.${index}.texture`} className="w-full">
-                    <h2 className="font-bold">Texture</h2>
+                    <h4 className="font-bold">Texture</h4>
                     <Upload
                       className="w-full h-[75px] aspect-square hover:bg-white transition-all bg-neutral-50 rounded-xl dark:bg-neutral-800 dark:hover:bg-black"
                       strokeWidth={0.2}
@@ -738,7 +737,7 @@ const AddProduct = () => {
                 </div>
 
                 <div className="">
-                  <h2 className="font-bold">Descriptions</h2>
+                  <h4 className="font-bold">Descriptions</h4>
                   <QuillEditor
                     value={variant.description ?? ""}
                     onChange={(html) => {
@@ -750,7 +749,7 @@ const AddProduct = () => {
                       setValue(`colors.${index}.description`, html);
                     }}
                   />
-                  <h2 className="text-lg font-bold mb-2">Preview:</h2>
+                  <h4 className="text-lg font-bold mb-2">Preview:</h4>
                   <div className=" p-2 border rounded min-h-[200px]">
                     <div
                       className="q1-editor"
@@ -897,9 +896,9 @@ const AddProduct = () => {
                             variant.id
                           )}.sizes.${parseInt(size.id)}.dimensionImage`}
                           className="w-full">
-                          <h2 className="font-bold">
+                          <h4 className="font-bold">
                             Dimension de cette taille
-                          </h2>
+                          </h4>
                           <Upload
                             className="w-full h-[75px] aspect-square hover:bg-white transition-all bg-neutral-50 rounded-xl dark:bg-neutral-800 dark:hover:bg-black"
                             strokeWidth={0.2}
@@ -939,7 +938,7 @@ const AddProduct = () => {
                         )}
                       </div>
                       <div className="">
-                        <h2 className="font-bold">Dimensions</h2>
+                        <h4 className="font-bold">Dimensions</h4>
                         <QuillEditor
                           value={size.dimensions ?? ""}
                           onChange={(value) =>
@@ -949,7 +948,7 @@ const AddProduct = () => {
                             })
                           }
                         />
-                        <h2 className="text-lg font-bold mb-2">Preview:</h2>
+                        <h4 className="text-lg font-bold mb-2">Preview:</h4>
                         <div className=" p-2 border rounded min-h-[200px]">
                           <div
                             className="q1-editor"
@@ -985,7 +984,7 @@ const AddProduct = () => {
                           variant.id
                         )}.sizes.${parseInt(size.id)}.images`}
                         className="w-full">
-                        <h2 className="font-bold">Images de cette taille</h2>
+                        <h4 className="font-bold">Images de cette taille</h4>
                         <Upload
                           className="w-full h-[75px] aspect-square hover:bg-white transition-all bg-neutral-50 rounded-xl dark:bg-neutral-800 dark:hover:bg-black"
                           strokeWidth={0.2}
@@ -1054,11 +1053,11 @@ const AddProduct = () => {
             ))}
           </div>
           <div className="w-full flex justify-start mt-2">
-            <h1
+            <div
               className="text-xs font-semibold border border-neutral-300 dark:border-neutral-600 px-2 py-1 rounded-full mb-1 flex justify-center items-center gap-1 cursor-pointer bg-neutral-100 hover:bg-white dark:bg-neutral-800"
               onClick={addVariant}>
               <Add className="size-5 inline" /> Ajouter un Couleur
-            </h1>
+            </div>
           </div>
         </div>
 

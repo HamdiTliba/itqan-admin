@@ -28,13 +28,14 @@ const AddCategorySelect: React.FC<AddCategorySelectProps> = ({
           src={category.image}
           alt={category.category}
           fill
+          sizes="20vw"
           loading="eager"
           className="rounded-t-[9px] object-cover"
         />
       </div>
-      <h1 className="flex justify-center items-center text-sm font-medium my-1">
+      <div className="flex justify-center items-center text-sm font-medium my-1">
         {category.category}
-      </h1>
+      </div>
     </div>
   );
 };

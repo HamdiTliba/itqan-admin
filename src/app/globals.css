@@ -206,7 +206,18 @@ input[type="number"] {
   direction: ltr;
 }
 
-
+h1 {
+  @apply text-4xl font-bold my-1;
+}
+h2 {
+  @apply text-3xl font-bold my-1;
+}
+h3 {
+  @apply text-2xl font-bold my-1;
+}
+p {
+  @apply text-lg leading-relaxed my-1;
+}
 
 li {
   @apply list-disc pl-0;
@@ -249,3 +260,19 @@ li[data-list="ordered"]:before {
   @apply hidden; /* Hide the empty span */
 }
 
+@layer components {
+  .ql-editor {
+    h1 {
+      @apply text-4xl font-bold my-4;
+    }
+    h2 {
+      @apply text-3xl font-bold my-4;
+    }
+    h3 {
+      @apply text-2xl font-bold my-4;
+    }
+    span {
+      background-color: transparent !important;
+    }
+  }
+}
