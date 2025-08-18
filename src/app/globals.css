@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
 }
 
 @theme inline {
@@ -14,8 +14,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #ffffff;
   }
 }
 
@@ -24,3 +24,228 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a6a6a6;
+
+  border-radius: 10px;
+}
+.hiddenScroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4ea3ff;
+  cursor: grabbing;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(5%);
+  }
+  65% {
+    transform: translateY(-2%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.2s ease-in-out;
+}
+@keyframes top-transition {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(10%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-top {
+  animation: top-transition 0.3s ease-in-out;
+}
+@keyframes bottom-transition {
+  0% {
+    transform: translateY(100%);
+  }
+  50% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-bottom {
+  animation: bottom-transition 0.3s ease-in-out;
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(5%);
+  }
+  65% {
+    transform: translateX(-2%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-left {
+  animation: slide-left 0.3s ease-in-out;
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-10%);
+  }
+  65% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-right {
+  animation: slide-right 0.3s ease-in-out;
+}
+
+@keyframes height-transition {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 100%;
+  }
+}
+.animate-height-transition {
+  animation: height-transition 2s ease-in-out;
+}
+
+@keyframes scale-in {
+  0% {
+    transform: scale(0);
+  }
+  65% {
+    transform: scale(1.01);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.animate-scale-in {
+  animation: scale-in 0.3s ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-in-out;
+}
+
+.stillShadow {
+  box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.boxShadow:hover {
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+}
+.skeleton {
+  background: linear-gradient(90deg, #eeeeee 25%, #ffffff 50%, #ececec 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.directionRtl {
+  direction: rtl;
+}
+.directionLtr {
+  direction: ltr;
+}
+
+
+
+li {
+  @apply list-disc pl-0;
+}
+blockquote {
+  @apply text-lg italic relative pl-3 pr-4;
+}
+blockquote::before {
+  content: "“";
+  @apply absolute left-0 top-0 text-3xl text-neutral-500;
+}
+
+blockquote::after {
+  content: "”";
+  @apply inline-block ml-1 text-3xl text-neutral-500;
+}
+/* .ql-code-block-container {
+  @apply bg-primary text-white p-1;
+} */
+ol {
+  @apply list-decimal pl-5; /* Standard ordered list styling */
+}
+
+ol li {
+  @apply relative; /* Needed for custom numbers */
+}
+
+/* Fix for Quill's generated structure */
+li[data-list="ordered"] {
+  @apply list-decimal pl-1;
+  counter-increment: list-item;
+}
+
+li[data-list="ordered"]:before {
+  content: none !important; /* Remove Quill's default pseudo-element */
+}
+
+/* Fix for the empty span Quill adds */
+.ql-ui {
+  @apply hidden; /* Hide the empty span */
+}
+
