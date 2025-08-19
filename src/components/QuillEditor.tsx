@@ -1,4 +1,3 @@
-/* QuillEditor.tsx */
 "use client";
 import { useEffect, useRef } from "react";
 import type Quill from "quill";
@@ -71,8 +70,10 @@ export default function QuillEditor({
 
     return () => {
       quillRef.current = null;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       if (wrapperRef.current) wrapperRef.current.innerHTML = "";
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // keep external value in sync

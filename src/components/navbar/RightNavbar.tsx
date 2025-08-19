@@ -1,9 +1,6 @@
-import Notification from "../svgs/Notification";
-import Settings from "../svgs/Settings";
 import NavUserButton from "./NavUserButton";
 import LogoutNav from "./Logout";
 import Refresh from "../svgs/Refresh";
-import ButtonThemeToggle from "../ButtonThemeToggle";
 
 export const style = `size-10 aspect-square flex justify-center items-center rounded-xl cursor-pointer border-[1px]  border-neutral-300 dark:border-neutral-600 `;
 

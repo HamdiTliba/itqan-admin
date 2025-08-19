@@ -12,7 +12,6 @@ import Trash from "@/components/svgs/Trash";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { Product } from "@/db/schema";
 import { addProduct } from "@/actions/products/addProduct";
@@ -96,8 +95,6 @@ const AddProduct = () => {
     handleSubmit,
     setValue,
     watch,
-    reset,
-    clearErrors,
     formState: { errors },
   } = useForm<Product>({
     mode: "onBlur",
@@ -117,9 +114,7 @@ const AddProduct = () => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     ImagePreviewTypes[] | []
   >([]);
-  const [materialQuill, setMaterialQuill] = useState([]);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
   const queryClient = useQueryClient();
   // useEffect(() => {
   //   setValue("colors", selectedColors);

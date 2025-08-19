@@ -112,7 +112,7 @@ const Order = ({
       </td>
       <td className="p-2 border-r border-neutral-300 dark:border-neutral-600 text-center">
         <div className="flex justify-evenly items-center gap-2">
-          <OrderActions order={order} withoutPdf title="Orders" />
+          <OrderActions order={order}  />
           <select
             value={order.status}
             onChange={(e) => handleStatusChange(e, order)}

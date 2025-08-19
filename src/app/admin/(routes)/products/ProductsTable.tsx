@@ -1,29 +1,23 @@
 "use client";
 import EmptyModal from "@/components/EmptyModal";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import AddProduct from "./AddProduct";
 import useAllProducts from "@/reactQueryHook/useAllProducts";
 import Image from "next/image";
 import Link from "next/link";
 import { shortText } from "@/utils/shortText";
-// import SizeByColor from "./SizeByColor";
-import { useRouter } from "next/navigation";
-// import ProductActions from "./ProductActions";
 import AddButton from "@/components/AddButton";
 import Input from "@/components/Input";
 import { useForm } from "react-hook-form";
-import { Product, ProductSize } from "@/db/schema";
 import ProductActions from "./ProductActions";
+import ProductStatusComp from "./ProductStatus";
 
 const ProductsTable = ({ onlyTable }: { onlyTable?: boolean }) => {
   const [isAddProductModal, setIsAddProductModal] = useState(false);
-  const [IsColorSize, setIsColorSize] = useState(false);
-  const [selectedColor, setSelectedColor] = useState("");
-  const [colorStatus, setcolorStatus] = useState<boolean>();
-  const [product, setProduct] = useState<Product>();
-  const { data: products, isLoading, isError } = useAllProducts();
 
-  const router = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { data: products, isLoading } = useAllProducts();
+
   const [searchInput, setsearchInput] = useState("");
   const {
     register,
@@ -41,15 +35,6 @@ const ProductsTable = ({ onlyTable }: { onlyTable?: boolean }) => {
   const addProduct = () => {
     setIsAddProductModal(true);
   };
-  const colorMatch = product?.colors.find(
-    (color) => color.hex === selectedColor
-  );
-  useEffect(() => {
-    if (product) {
-      console.log(colorMatch);
-      setcolorStatus(colorMatch?.status);
-    }
-  }, [colorMatch, product, products, router, selectedColor, IsColorSize]);
 
   return (
     <div className="flex flex-col gap-2 h-full w-full ">
@@ -148,12 +133,6 @@ const ProductsTable = ({ onlyTable }: { onlyTable?: boolean }) => {
                             key={c.id}
                             className={` size-4 rounded cursor-pointer`}
                             style={{ background: c.color }}
-                            onClick={() => {
-                              setProduct(product);
-                              setSelectedColor(c.hex!); // Then select the color
-                              setIsColorSize(true);
-                              router.refresh(); // Refresh the page to reflect the latest state
-                            }}
                           />
                         ))}
                       </div>
@@ -163,7 +142,10 @@ const ProductsTable = ({ onlyTable }: { onlyTable?: boolean }) => {
                   <td className="border-r border-neutral-300 dark:border-neutral-600 p-1 md:p-2">
                     <ProductActions product={product} />
                   </td>
-                  <td>{/* <ProductStatusComp product={product} /> */}</td>
+                  <td>
+                    {" "}
+                    <ProductStatusComp product={product} />
+                  </td>
                 </tr>
               ))}
             </tbody>

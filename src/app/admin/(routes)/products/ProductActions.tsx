@@ -1,6 +1,5 @@
 "use client";
 
-import Edit from "@/components/svgs/Edit";
 import Trash from "@/components/svgs/Trash";
 
 import toast from "react-hot-toast";

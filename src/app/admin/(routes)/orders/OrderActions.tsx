@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 // import { saveAs } from "file-saver";
 import DeleteConfirm from "../products/DeleteProductConfirm";
 import { deleteOrder } from "@/actions/orders/deleteOrder";
+import { Order } from "@/db/schema";
 
 export type OrderTitle =
   | "Bon de commande"
@@ -17,18 +18,7 @@ export type OrderTitle =
   | "Paiements"
   | "Retour"
   | "Orders";
-const OrderActions = ({
-  order,
-  withoutPdf,
-  title,
-  addToCart,
-}: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  order: any;
-  withoutPdf?: boolean;
-  addToCart?: boolean;
-  title: OrderTitle;
-}) => {
+const OrderActions = ({ order }: { order: Order }) => {
   const [isDeleteProduct, setIsDeleteProduct] = useState(false);
   const queryClient = useQueryClient();
   console.log(order);
@@ -48,7 +38,7 @@ const OrderActions = ({
 
     setIsDeleteProduct(false);
   };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   //   const handleShare = (blob: any) => {
   //     saveAs(blob, `${title}.pdf`);
   //     window.location.href = `mailto:?subject=${encodeURIComponent(
@@ -61,8 +51,6 @@ const OrderActions = ({
         className="cursor-pointer size-5 md:size-8 bg-white dark:bg-black border border-neutral-300 dark:border-neutral-600 p-1 rounded-md"
         onClick={() => setIsDeleteProduct(true)}
       />
- 
-  
 
       {isDeleteProduct && (
         <EmptyModal
@@ -77,7 +65,6 @@ const OrderActions = ({
           />
         </EmptyModal>
       )}
-
     </div>
   );
 };

@@ -2,9 +2,8 @@
 import { useEffect, useState } from "react";
 import User from "../svgs/User";
 import { style } from "./RightNavbar";
-import { signOut, useSession } from "next-auth/react";
+import {  useSession } from "next-auth/react";
 import Image from "next/image";
-import Button from "../Button";
 
 const NavUserButton = () => {
   const { data: session, status } = useSession();
@@ -13,14 +12,11 @@ const NavUserButton = () => {
   console.log("session", session);
   console.log(status);
 
-  //   if (status === "loading") return <div>Loading...</div>;
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setUserInfo(false);
     }, 3000);
 
-    // Clean up the timeout on component unmount
     return () => clearTimeout(timer);
   }, [userInfo]);
   return (
@@ -57,13 +53,6 @@ const NavUserButton = () => {
           <div className="capitalize text-sm text-end font-semibold text-green-600">
             {session?.user.role.toLocaleLowerCase()}
           </div>
-          {/* <Button
-            black
-            label="Log out"
-            onClick={signOutClick}
-            widthFull
-            className="h-10"
-          /> */}
         </div>
       )}
     </div>

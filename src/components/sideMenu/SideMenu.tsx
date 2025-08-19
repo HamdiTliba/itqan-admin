@@ -38,7 +38,7 @@ export const sectionPaths = [
         href: "orders",
         subPages: [],
       },
-      { page: "Categories", icon: <Categories />, href: "categories" },
+      // { page: "Categories", icon: <Categories />, href: "categories" },
       { page: "Produits", icon: <Shirt />, href: "products" },
     ],
   },

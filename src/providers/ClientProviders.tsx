@@ -5,8 +5,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import MountedProvider from "@/providers/MountedProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import { Toaster } from "react-hot-toast";
-import ButtonThemeToggle from "@/components/ButtonThemeToggle";
-import { auth } from "../auth";
+
 
 export default function ClientProviders({
   children,
@@ -33,7 +32,6 @@ export default function ClientProviders({
         />
         <SessionProvider>
           <ReactQueryProvider>
-            {/* <ButtonThemeToggle /> */}
             {children}
           </ReactQueryProvider>
         </SessionProvider>

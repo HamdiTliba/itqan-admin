@@ -1,21 +1,5 @@
-type Color = {
-  name: string;
-  hexColor: string;
-};
 
-type Size = {
-  id: number;
-  name: string;
-  quantity: number;
-};
 
-type ColorItem = {
-  id: number; // This is colorId
-  color: Color;
-  sizes: Size[];
-  images: string[]; // URLs of images
-  status: boolean;
-};
 
 type ConvertedColorImages = {
   colorId: number; // This corresponds to `id` from ColorItem
