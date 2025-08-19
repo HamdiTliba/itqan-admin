@@ -1,15 +1,16 @@
-"use client";
 import Navbar from "@/components/navbar/Navbar";
 import SideMenu from "@/components/sideMenu/SideMenu";
 import MountedProvider from "@/providers/MountedProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import { SessionProvider } from "next-auth/react";
+import { auth } from "../../auth";
 
-const LayoutAdmin = ({ children }: { children: React.ReactNode }) => {
+const LayoutAdmin = async ({ children }: { children: React.ReactNode }) => {
+  const session = await auth();
   return (
     <div className="flex overflow-hidden h-screen md:max-h-[768px] bg-neutral-50 dark:bg-neutral-800">
       <MountedProvider>
-        <SessionProvider>
+        <SessionProvider session={session}>
           <SideMenu />
 
           <div className="flex flex-col overflow-hidden w-full">

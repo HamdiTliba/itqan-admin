@@ -10,7 +10,7 @@ const NavUserButton = () => {
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState(false);
 
-  console.log(session);
+  console.log("session", session);
   console.log(status);
 
   //   if (status === "loading") return <div>Loading...</div>;

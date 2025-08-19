@@ -1,12 +1,14 @@
 "use client";
+
 import { login } from "@/actions/user/login";
-import Button from "@/components/Button";
-import Input from "@/components/Input";
-import useGlobal from "@/hooks/useGlobal";
+
 import { useState } from "react";
 
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import Input from "../Input";
+import Button from "../Button";
+import useGlobal from "@/hooks/useGlobal";
 
 const LoginForms = () => {
   const { setAccount } = useGlobal();
@@ -28,22 +30,8 @@ const LoginForms = () => {
     }
   };
 
-  // const googleSignIn = () => {
-  //   signIn("google", { callbackUrl: DEFAULT_LOGIN_REDIRECT });
-  // };
   return (
-    <div className="flex flex-col gap-2 w-full max-w-md p-2 border border-neutral-300 dark:border-neutral-600 rounded-3xl ">
-      {/* <button
-        className="relative border hover:bg-neutral-50 transition-all border-blue-500 flex w-full justify-center items-center h-16 rounded-full "
-        onClick={googleSignIn}>
-        <GoogleSvg
-          className="h-full aspect-square absolute p-3 left-0"
-          color="#3f82ef"
-        />
-        <div className="flex w-full h-full justify-center items-center text-lg text-blue-500">
-          Continuer avec Google
-        </div>
-      </button> */}
+    <div className="flex flex-col gap-2 w-full max-w-md p-2 border border-neutral-300 dark:border-neutral-600 rounded-3xl shadow-md bg-white/50">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
         <Input
           id="email"
@@ -60,6 +48,7 @@ const LoginForms = () => {
           errors={errors}
           type="email"
           required
+          // className="h-14"
         />
         <Input
           id="password"
@@ -75,12 +64,13 @@ const LoginForms = () => {
           errors={errors}
           required
           type="password"
+          // className="h-14"
         />
         <Button
           widthFull
           label={"S'inscrire"}
           onClick={handleSubmit(onSubmit)}
-          className="h-16 bg-sky-600"
+          className="h-12 bg-sky-600"
           textClassName="text-xl"
           black
           loading={loading}

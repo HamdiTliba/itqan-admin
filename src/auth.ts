@@ -1,7 +1,7 @@
 import NextAuth, { type DefaultSession } from "next-auth";
 
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import authConfig from "./auth.config";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "@/db/db";
 
 export type ExtendedUser = DefaultSession["user"] & {
@@ -17,7 +17,12 @@ declare module "next-auth" {
     user: ExtendedUser;
   }
 }
-export const { auth, signIn, signOut } = NextAuth({
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+} = NextAuth({
   session: { strategy: "jwt" },
   adapter: DrizzleAdapter(db),
   ...authConfig,

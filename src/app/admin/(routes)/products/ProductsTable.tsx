@@ -13,6 +13,7 @@ import AddButton from "@/components/AddButton";
 import Input from "@/components/Input";
 import { useForm } from "react-hook-form";
 import { Product, ProductSize } from "@/db/schema";
+import ProductActions from "./ProductActions";
 
 const ProductsTable = ({ onlyTable }: { onlyTable?: boolean }) => {
   const [isAddProductModal, setIsAddProductModal] = useState(false);
@@ -160,7 +161,7 @@ const ProductsTable = ({ onlyTable }: { onlyTable?: boolean }) => {
                   </td>
 
                   <td className="border-r border-neutral-300 dark:border-neutral-600 p-1 md:p-2">
-                    {/* <ProductActions product={product} /> */}
+                    <ProductActions product={product} />
                   </td>
                   <td>{/* <ProductStatusComp product={product} /> */}</td>
                 </tr>

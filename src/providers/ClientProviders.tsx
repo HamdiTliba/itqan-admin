@@ -6,13 +6,13 @@ import MountedProvider from "@/providers/MountedProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import { Toaster } from "react-hot-toast";
 import ButtonThemeToggle from "@/components/ButtonThemeToggle";
+import { auth } from "../auth";
 
 export default function ClientProviders({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  
   return (
     <MountedProvider>
       <ThemeProvider attribute="class" defaultTheme="system">

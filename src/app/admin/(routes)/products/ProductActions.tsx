@@ -10,18 +10,19 @@ import EmptyModal from "@/components/EmptyModal";
 // import EditProductForm from "./EditProductForm";
 import DeleteConfirm from "./DeleteProductConfirm";
 import { Product } from "@/db/schema";
+import { deleteProduct } from "@/actions/products/deleteProduct";
 
 interface ProductActionsProps {
   product: Product;
 }
 
 const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
-  const [isEditProduct, setIsEditProduct] = useState(false);
+  // const [isEditProduct, setIsEditProduct] = useState(false);
   const [isDeleteProduct, setIsDeleteProduct] = useState(false);
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
-    // mutationFn: async () => await deleteProduct(product.id),
+    mutationFn: async () => await deleteProduct(product.id),
     onSuccess: () => {
       toast.success("Product deleted successfully!");
       queryClient.invalidateQueries({ queryKey: ["products"] });
@@ -38,10 +39,10 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
 
   return (
     <div className="flex flex-col md:flex-row justify-evenly w-full items-center gap-2">
-      <Edit
+      {/* <Edit
         className="cursor-pointer size-5 md:size-8 bg-neutral-50 dark:bg-neutral-800"
         onClick={() => setIsEditProduct(true)}
-      />
+      /> */}
       <Trash
         className="cursor-pointer size-5 md:size-8 bg-neutral-50 dark:bg-neutral-800"
         onClick={() => setIsDeleteProduct(true)}
