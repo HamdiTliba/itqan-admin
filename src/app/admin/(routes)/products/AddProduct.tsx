@@ -19,25 +19,29 @@ import useAddProducts from "@/hooks/useAddProducts";
 import generateNumericId from "@/utils/generateNumericId";
 import QuillEditor from "@/components/QuillEditor";
 const categories = [
-  {
-    id: "1",
-    category: "Table",
-    image:
-      "https://www.westelm.co.uk/site/WE/Product%20Images/cannellini-coffee-table-h12195-202350-0161-cannellini-coffee-table-47-1-z.jpg?resizeid=64&resizeh=1200&resizew=1200",
-  },
+  // {
+  //   id: "1",
+  //   category: "Table",
+  //   path: "table",
+  //   image:
+  //     "https://www.westelm.co.uk/site/WE/Product%20Images/cannellini-coffee-table-h12195-202350-0161-cannellini-coffee-table-47-1-z.jpg?resizeid=64&resizeh=1200&resizew=1200",
+  // },
   {
     id: "2",
     category: "Table basse",
+    path: "table-basse",
     image: "/coffeeTable.png",
   },
   {
     id: "3",
     category: "Table de nuit",
+    path: "table-de-nuit",
     image: "/nightstand.png",
   },
   {
     id: "4",
     category: "Commode",
+    path: "commode",
     image: "/commode.png",
   },
 ];
@@ -457,6 +461,7 @@ const AddProduct = () => {
       const productData = {
         book: data.book,
         category: selectedCategory?.category,
+        categoryPath: selectedCategory?.path,
         productName: data.productName,
         colors: selectedColors.map((color) => ({
           id: color.id,

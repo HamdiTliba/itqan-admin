@@ -41,6 +41,7 @@ export const products = pgTable("products", {
   // materials: text("materials"),
   book: text("book"),
   category: text("category"),
+  categoryPath: text("category_path"),
   isActiveCoupon: boolean("coupon").default(false),
   colors: jsonb("colors").$type<ProductColor[]>().notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
