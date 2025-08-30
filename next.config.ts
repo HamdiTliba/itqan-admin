@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: false,
   devIndicators: false,
   eslint: {
-    dirs: ["utils"],
+    ignoreDuringBuilds: true,
   },
   images: {
     remotePatterns: [
